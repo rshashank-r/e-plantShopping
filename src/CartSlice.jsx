@@ -9,6 +9,7 @@ export const CartSlice = createSlice({
   reducers: {
     // ✅ ADD ITEM — Called from handleAddToCart() in ProductList.jsx
     addItem: (state, action) => {
+      // cost is now correctly received as a number
       const { name, image, cost } = action.payload; // Extract product details
       const existingItem = state.items.find(item => item.name === name); // Check if item exists
 
@@ -16,7 +17,7 @@ export const CartSlice = createSlice({
         // If item already exists, increase its quantity
         existingItem.quantity++;
       } else {
-        // Otherwise, add new item with quantity 1
+        // Otherwise, add new item with quantity 1 (with cost as a number)
         state.items.push({ name, image, cost, quantity: 1 });
       }
     },
