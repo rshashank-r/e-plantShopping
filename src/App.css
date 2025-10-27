@@ -5,30 +5,28 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* CRITICAL FIX: Removed overflow: hidden from universal selector. */
 }
 
-/* Ensure no horizontal scrolling on the body */
 body {
+  font-family: Arial, sans-serif;
   overflow-x: hidden;
 }
 
 .app-container {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 /* 2. Landing Page Styles */
 
 .landing-page {
-  position: fixed; /* Use fixed positioning to occupy the whole screen */
+  position: fixed; 
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
   background-color: #f8f8f8;
-  z-index: 30; /* Ensure landing page is on top initially */
-  /* Added transition for the fade-out effect controlled by App.jsx */
+  z-index: 30; 
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
@@ -36,12 +34,7 @@ body {
 .landing-page.fade-out {
   opacity: 0;
   transform: translateY(-50px);
-  pointer-events: none; /* Disable clicks during fade-out */
-}
-
-/* State for removing the element after transition */
-.landing-page.hidden {
-  display: none;
+  pointer-events: none;
 }
 
 .background-image {
@@ -51,13 +44,13 @@ body {
   width: 100%;
   height: 100%;
   background-image: url('https://cdn.pixabay.com/photo/2017/07/13/08/59/greenhouse-2499758_1280.jpg');
-  background-size: cover; /* Changed to 'cover' for better scaling */
+  background-size: cover;
   background-position: center;
   filter: brightness(0.8);
 }
 
 .content {
-  position: relative; /* Position relative to z-index works */
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -65,12 +58,11 @@ body {
   width: 100vw;
   backdrop-filter: blur(4px);
   background-color: rgba(0,0,0,0.5);
-  gap: 50px; /* Spacing between landing content and about us */
+  gap: 50px;
   z-index: 10;
 }
 
 .landing_content {
-  /* FIX: Simplified layout, relying on flex properties of .content */
   z-index: 1;
   text-align: center;
   width: 400px;
@@ -122,20 +114,20 @@ body {
 /* 3. Product List Container Styles */
 
 .product-list-container {
-  position: fixed; /* Use fixed to cover the screen reliably */
+  position: fixed;
   overflow-x: hidden;
-  top: 100vh; /* Initially off-screen, below the viewport */
+  top: 100vh; 
   left: 0;
   width: 100%;
   height: 100vh;
   background-color: white; 
   transition: top 0.5s ease;
-  overflow-y: auto; /* Enable vertical scrolling for products */
-  z-index: 20; /* Lower than landing page initially, but higher than other content */
+  overflow-y: auto;
+  z-index: 20; 
 }
 
 .product-list-container.visible {
-  top: 0; /* Slides into view */
+  top: 0;
 }
 
 /* 4. Media Queries for Responsiveness */

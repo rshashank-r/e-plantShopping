@@ -7,41 +7,35 @@ export const CartSlice = createSlice({
   },
 
   reducers: {
-    // ✅ ADD ITEM — Called from handleAddToCart() in ProductList.jsx
+    // ADD ITEM: Expects cost to be a number.
     addItem: (state, action) => {
-      // cost is now correctly received as a number
-      const { name, image, cost } = action.payload; // Extract product details
-      const existingItem = state.items.find(item => item.name === name); // Check if item exists
+      const { name, image, cost } = action.payload; // cost is a number
+      const existingItem = state.items.find(item => item.name === name);
 
       if (existingItem) {
-        // If item already exists, increase its quantity
         existingItem.quantity++;
       } else {
-        // Otherwise, add new item with quantity 1 (with cost as a number)
+        // Store item with quantity 1 (cost is a number)
         state.items.push({ name, image, cost, quantity: 1 });
       }
     },
 
-    // ✅ REMOVE ITEM — Called when user removes product from cart
+    // REMOVE ITEM
     removeItem: (state, action) => {
-      // action.payload = product name
       state.items = state.items.filter(item => item.name !== action.payload);
     },
 
-    // ✅ UPDATE QUANTITY — Called when user changes quantity in cart
+    // UPDATE QUANTITY
     updateQuantity: (state, action) => {
-      const { name, quantity } = action.payload; // Extract item name and updated quantity
+      const { name, quantity } = action.payload;
       const itemToUpdate = state.items.find(item => item.name === name);
 
       if (itemToUpdate) {
-        itemToUpdate.quantity = quantity; // Update quantity if item exists
+        itemToUpdate.quantity = quantity;
       }
     },
   },
 });
 
-// ✅ Export actions for use in components
 export const { addItem, removeItem, updateQuantity } = CartSlice.actions;
-
-// ✅ Export reducer for store.js
 export default CartSlice.reducer;
